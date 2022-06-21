@@ -1,0 +1,130 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+
+@{
+    var header= Umbraco.Content(2060);
+    var navigationbar = Model.Root().Children();
+
+
+}
+ <!-- Topbar Start -->
+    <div class="container-fluid bg-dark">
+        <div class="row py-2 px-lg-5">
+            <div class="col-lg-6 text-center text-lg-left mb-2 mb-lg-0">
+                <div class="d-inline-flex align-items-center text-white">
+                    <small><i class="fa fa-phone-alt mr-2"></i>@header.GetProperty("contactNumber").GetValue()</small>
+                    <small class="px-3">|</small>
+                    <small><i class="fa fa-envelope mr-2"></i>@header.GetProperty("emailId").GetValue()</small>
+                </div>
+            </div>
+            <div class="col-lg-6 text-center text-lg-right">
+                <div class="d-inline-flex align-items-center">
+                     @{
+                                                var Data = @header.GetProperty("headersocialMediaNested").GetValue();
+                                                if (Data != null)
+                                                {
+                                                  foreach (var item in Data as List<SocialMedia>)
+                                                    {
+
+                                                        <a href="@item.SocialIconUrl.FirstOrDefault()?.Url" target="_blank">
+                                                         <img src=@item.SocialIconImage.LocalCrops.Src Width="35" Height="35" > </img>
+                                                                 </a>
+                                                    }
+                                                }
+                     }
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Topbar End -->
+
+@*<!-- Topbar Start -->
+    <div class="container-fluid bg-dark">
+        <div class="row py-2 px-lg-5">
+            <div class="col-lg-6 text-center text-lg-left mb-2 mb-lg-0">
+                <div class="d-inline-flex align-items-center text-white">
+                    <small><i class="fa fa-phone-alt mr-2"></i>@header.GetProperty("phoneNumber").GetValue()</small>
+                    <small class="px-3">|</small>
+                    <small><i class="fa fa-envelope mr-2"></i>@header.GetProperty("emailId").GetValue()</small>
+                </div>
+            </div>
+            <div class="col-lg-6 text-center text-lg-right">
+                <div class="align-items-center">
+
+				@{
+					var link = @header.GetProperty("nestedSocialIcon").GetValue();
+					if (link != null)
+					{
+						foreach (var item in link as List<H>)
+						{
+
+							<a href="@item.ContentUrl.FirstOrDefault().Url" target="_blank">
+                                <img src=@item.Icon.LocalCrops.Src Width="35" Height="35" > </img>
+                            </a>
+						}
+					}
+				}
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Topbar End -->*@
+
+
+    <!-- Navbar Start -->
+
+
+
+
+    @*<div class="container-fluid p-0">
+        <nav class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-lg-5">
+            <a href="index.html" class="navbar-brand ml-lg-3"> 
+
+                
+             <h1 class="m-0 display-5 text-uppercase text-primary"><i class="@header.GetProperty("brandlogo").GetValue()"></i>@header.GetProperty("logoTitle").GetValue()</h1>
+                </a>
+               <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content px-lg-3" id="navbarCollapse">
+                <div class="navbar-nav m-auto py-0">
+               <nav class="nav-bar top-nav" style="display: flex !important;"> @*inline css used beacause it is overlaping not able to implement css on external css This style refers to Line No=52 where need to implement css*@
+                @*<a class="nav-link" href="/">Home</a>
+                @foreach (var child in @navigationbar)
+                {
+                    <a class="nav-link" href="@child.Url()">@child.Name</a>
+
+                }
+                </nav>
+                </div>
+                <a href="" class="btn btn-primary py-2 px-4 d-none d-lg-block">@header.GetProperty("quoteTitle").GetValue()</a>
+            </div>
+        </nav>
+    </div>*@
+
+
+        @*<nav class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-lg-5">
+            <a href="index.html" class="navbar-brand ml-lg-3"> 
+
+                
+             <h1 class="m-0 display-5 text-uppercase text-primary"><i class="@header.GetProperty("fasterLogo").GetValue()"></i>@header.GetProperty("logoTitle").GetValue()</h1>
+                </a>
+               <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content px-lg-3" id="navbarCollapse">
+                <div class="navbar-nav m-auto py-0">
+               <nav class="nav-bar top-nav display-flex">
+                <a class="nav-link" href="/">Home</a>
+                @foreach (var child in @navigationbar)
+                {
+                    <a class="nav-link" href="@child.Url()">@child.Name</a>
+
+                }
+                </nav>
+                </div>
+                <a href="" class="btn btn-primary py-2 px-4 d-none d-lg-block">@header.GetProperty("quoteTitle").GetValue()</a>
+            </div>
+        </nav>*@
+    </div>
+    
+    <!-- Navbar End -->

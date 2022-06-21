@@ -1,0 +1,96 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@using Umbraco.Cms.Core.Models
+@{
+     var Model = Umbraco.ContentAtRoot().FirstOrDefault()
+    .ChildrenOfType("footer").Where(x => x.IsVisible()).OfType<Footer>().FirstOrDefault();
+    var footer= Umbraco.Content("083f8668-03f9-4c36-87ee-0fc73a9d1dce");
+   
+}
+  <!-- Footer Start -->
+    <div class="container-fluid bg-dark text-white mt-5 py-5 px-sm-3 px-md-5">
+        <div class="row pt-5">
+            <div class="col-lg-7 col-md-6">
+                <div class="row">
+                    <div class="col-md-6 mb-5">
+                       <h3 class="text-primary mb-4">@footer.GetProperty("contactTitle").GetValue()</h3>
+                        <p><i class="fa fa-map-marker-alt mr-2"></i>@footer.GetProperty("footerAdress").GetValue()</p>
+                        <p><i class="fa fa-phone-alt mr-2"></i>@footer.GetProperty("footerContactNumber").GetValue()</p>
+                        <p><i class="fa fa-envelope mr-2"></i>@footer.GetProperty("footerEmail").GetValue()</p>
+                        <div class="d-flex justify-content-start mt-4">
+                         @{
+                                                var Data = @footer.GetProperty("footerNestedSocialIcon").GetValue();
+                                                if (Data != null)
+                                                {
+                                                  foreach (var item in Data as List<SocialMedia>)
+                                                    {
+
+                                                    <a href="@item.SocialIconUrl.FirstOrDefault()?.Url" target="_blank">
+                                                     <img src=@item.SocialIconImage.LocalCrops.Src Width="35" Height="35" > </img>
+                                                             </a>
+                                                    }
+                                                }
+                                              }
+
+                            
+                        </div>
+                    </div>
+
+                    
+                    <div class="col-md-6 mb-5">
+                        <h3 class="text-primary mb-4">@footer.GetProperty("footerTitle2").GetValue()</h3>
+                        <div class="d-flex flex-column justify-content-start">
+                        @{
+                            var link = @footer.GetProperty("QuickLinks").GetValue();
+                            if(link != null)
+                            {
+                                foreach (var item in link as List<Link>) 
+                                {
+                                    <a href=@item.Url target="@item.Target">@item.Name</a>
+                                }
+							}
+                        }   
+                         
+                        
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-5 col-md-6 mb-5">
+                <h3 class="text-primary mb-4">@footer.GetProperty("footerTitle3").GetValue()</h3>
+                <p>@footer.GetProperty("footerTitle3Describe").GetValue()</p>
+                <div class="w-100">
+                    <div class="input-group">
+                        <input type="text" class="form-control border-light" style="padding: 30px;" placeholder="Your Email Address">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary px-4">Sign Up</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid bg-dark text-white border-top py-4 px-sm-3 px-md-5" style="border-color: #3E3E4E !important;">
+        <div class="row">
+            <div class="col-lg-6 text-center text-md-left mb-3 mb-md-0">
+                <p class="m-0 text-white"> <a href="#"></a>
+                </p>
+            </div>
+            <div class="col-lg-6 text-center text-md-right">
+                <ul class="nav d-inline-flex">
+                    <li class="nav-item">
+                        <a class="nav-link text-white py-0" href="#">Privacy</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white py-0" href="#">Terms</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white py-0" href="#">FAQs</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white py-0" href="#">Help</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- Footer End -->

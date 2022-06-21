@@ -1,0 +1,79 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@using Umbraco.Cms.Core.Models;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.Price>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@{
+	Layout = "MasterPage.cshtml";
+}
+ <!-- Pricing Plan Start -->
+    <div class="container-fluid pt-5">
+        <div class="container">
+            <div class="text-center pb-2">
+                <h6 class="text-primary text-uppercase font-weight-bold">Pricing Plan</h6>
+                <h1 class="mb-4">Affordable Pricing Packages</h1>
+            </div>
+            <div class="row">
+            @if (Model.NestedPricingPlan.Count() > 0)
+            {
+                @foreach (PricingPlan pricing in Model.NestedPricingPlan)
+                {
+                    <div class="col-md-4 mb-5">
+                        <div class="bg-secondary">
+                            <div class="text-center p-4">
+                                <h1 class="display-4 mb-0">
+
+                                    <small class="align-top text-muted font-weight-medium" style="font-size: 22px; line-height: 45px;">$</small>@pricing.PricingPlanPrice<small class="align-bottom text-muted font-weight-medium" style="font-size: 16px; line-height: 40px;">/Mo</small>
+                                </h1>
+                                <div class="bg-primary text-center p-4">
+                                    <h3 class="m-0">@pricing.PricingPlanType</h3>
+                                </div>
+                                <div class="d-flex flex-column align-items-center py-4">
+                                    <p>@pricing.PricingPlanOffer1</p>
+                                    <p>@pricing.PricingPlanOffer2</p>
+                                    <p>@pricing.PricingPlanOffer3</p>
+                                    <p>@pricing.PricingPlanOffer4</p>
+                                    <a href="" class="btn btn-primary py-2 px-4 my-2">@pricing.PricingPlanButtonName</a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                }
+            }
+        </div>
+                </div> 
+                </div>
+          
+    <!-- Pricing Plan End -->
+
+
+      <!-- Testimonial Start -->
+    <div class="container-fluid py-5">
+        <div class="container">
+            <div class="text-center pb-2">
+                <h6 class="text-primary text-uppercase font-weight-bold">@Model.PriceTestimonialTitle1</h6>
+                <h1 class="mb-4">@Model.PriceTestimonialTitle2</h1>
+            </div>
+             <div class="owl-carousel testimonial-carousel">
+            @foreach(Testimonial test in Model.PriceTestimonialNested)
+            {
+            
+                <div class="position-relative bg-secondary p-4">
+                    <i class="fa fa-3x fa-quote-right text-primary position-absolute" style="top: -6px; right: 0;"></i>
+                    <div class="d-flex align-items-center mb-3">
+                        <img class="img-fluid rounded-circle" src=@test.TestimonialClientImage?.Url() style="width: 60px; height: 60px;" alt="">
+                        <div class="ml-3">
+                            <h6 class="font-weight-semi-bold m-0">@test.TestimonialClientName</h6>
+                            <small>@test.TestimonialClientDesignation</small>
+                        </div>
+                    </div>
+                    <p class="m-0">Sed ea amet kasd elitr stet, stet rebum et ipsum est duo elitr clita lorem. Dolor ipsum sanct clita</p>
+                </div>
+                
+                
+            
+            }
+        </div>
+    </div>
+    </div>
+    <!-- Testimonial End -->
